@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="UTF-8">
+ <title>Bounce Ball</title>
+</head>
+
+<body>
+	<style>
+	* {
+	 padding:0; margin:0;
+	}
+	#screen {
+	 width: 1350px;
+	 height: 500px;
+	 overflow: hidden;
+	 /*background-color: black;*/
+	}
+	#ball{
+	background: red;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	}
+
+	</style>
+
+	<div id="screen">
+		 <div id="ball">
+
+		 </div>
+	</div>
+
+	<script>
+		var width = 1350;
+		var height =500;
+		var topVal=300;
+		var leftVal=0;
+		var dx=10;
+		var dy=10;
+		var ballWidth=50;
+		var ballHeight=50;
+		var topNegative=false;
+		var leftNegative=false;
+		var gravity=2;
+		var ball = document.getElementById("ball");
+		function gameLoop() {
+		 moveBall()
+		}
+
+
+		function game() {
+		 setInterval(gameLoop, 50);
+		}
+
+		function moveBall(){
+			console.log(leftVal, topVal,dy,gravity)
+			ball.style.top=topVal+'px';
+			ball.style.left=leftVal+'px';
+
+			totalHeight=topVal+ballHeight;
+			totalWidth=leftVal+ballWidth;
+
+			if(dy==0){
+				dy=gravity;
+			}
+			if (topVal>=height){
+				dy*=-1;	
+				topVal-=topVal-height
+			}
+			if(totalWidth>=width){
+				if((dx>0 && dy<0)|| (dx>0 && dy>0)){
+					dx*=-1;
+				}
+			}
+			if(leftVal<=0 && topVal!=0 ){
+				if((dx<0 && dy>0)||(dx<0 && dy<0)){
+					dx*=-1;
+				}
+			}
+			dy+=gravity;
+			topVal=topVal+dy
+			leftVal+=dx;
+		}
+		game();
+
+		
+	</script>
+
+</body>
+</html>
